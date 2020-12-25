@@ -1,0 +1,52 @@
+
+<form
+    class="example-form"
+    [formGroup]="singupForm"
+    (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+    <span *ngIf="!singupForm.get('username').valid && singupForm.get('username').touched">
+      <span *ngIf="singupForm.get('username').errors['required']">
+        Entrer un username
+      </span>
+      <span *ngIf="singupForm.get('username').errors['nameIsValid']">
+        le username existe déjà
+      </span>
+    </span>
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        [(ngModel)]="pwd">
+    </mat-form-field>
+    <span *ngIf="!singupForm.get('password').valid && singupForm.get('password').touched">
+      <span *ngIf="singupForm.get('password').errors['required']">
+        Entrer le mot de passe
+      </span>
+    </span>
+    <mat-form-field class="example-full-width">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        formControlName="confirmPassword"
+        type="password">
+    </mat-form-field>
+    <span *ngIf="!singupForm.get('confirmPassword').valid && singupForm.get('confirmPassword').touched">
+      <span *ngIf="singupForm.get('confirmPassword').errors['required']">
+        confirmer le mot de passe
+      </span>
+      <span *ngIf="singupForm.get('confirmPassword').errors.passwordIsValid && !singupForm.get('confirmPassword').errors.required">
+       les mots de passe diffèrents
+      </span>
+    </span>
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn-width"
+      type="submit"
+      [disabled]="singupForm.invalid">Valider</button>
+  </form>

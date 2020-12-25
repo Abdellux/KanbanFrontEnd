@@ -1,0 +1,33 @@
+<app-alert-message
+    *ngIf="invalidLoginError"
+    [alertMessage]="invalidLoginErrorMessage"
+    (alertClosed)="closeMessage()"></app-alert-message>
+  <form
+    class="example-form"
+    [formGroup]="signinForm"
+    (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Username</mat-label>
+      <input type="text" matInput formControlName="username">
+    </mat-form-field>
+    <span *ngIf="!signinForm.get('username').valid && signinForm.get('username').touched">
+      <span *ngIf="signinForm.get('username').errors['required']">
+        Entrer un username
+      </span>
+    </span>
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password">
+    </mat-form-field>
+    <span *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched">
+      <span *ngIf="signinForm.get('password').errors['required']">
+        Entrer le mot de passe
+      </span>
+    </span>
+    <button
+    mat-flat-button
+    color="primary"
+    class="btn-width"
+    type="submit"
+    [disabled]="!signinForm.valid">Valider</button>
+  </form>

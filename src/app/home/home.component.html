@@ -1,0 +1,19 @@
+<div class="card-center">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>MonKanban</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <nav mat-tab-nav-bar >
+        <a mat-tab-link *ngFor="let link of links; index as i"
+           (click)="onChangeLink(link)"
+           [active]="activeLink == link"
+           [routerLink]="['/home', linksRoutes[i]]"> {{link}} </a>
+      </nav>
+     <router-outlet></router-outlet>
+     <div class="public-kanban">
+      <button mat-flat-button color="primary" class="btn-width">Voir les Kanbans publics</button>
+    </div>
+    </mat-card-content>
+  </mat-card>
+</div>

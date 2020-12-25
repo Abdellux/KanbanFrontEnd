@@ -1,0 +1,23 @@
+.example-card {
+  max-width: 550px;
+}
+
+.card-center {
+text-align: -webkit-center;
+margin-top: 10%;
+}
+
+.mat-tab-group {
+margin-bottom: 70px;
+}
+.public-kanban{
+margin-top: 50px;
+}
+.btn-width{
+  width: 100%;
+}
+
+.example-action-button {
+  margin-top: 8px;
+  margin-right: 8px;
+}
