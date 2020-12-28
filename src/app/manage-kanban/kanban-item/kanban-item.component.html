@@ -1,0 +1,15 @@
+<a href="#"
+  class="list-group-item list-group-item-action list-group-item-primary"
+  [ngClass]="{
+            'list-group-item-primary': kanban.state === 'private',
+            'list-group-item-success': kanban.state !== 'private'
+          }">
+  <div class="d-flex w-100 justify-content-between">
+    <h4 class="mb-3">{{ kanban.name }}</h4>
+    <small *ngIf="kanban.state === 'private';else public">Privé </small>
+    <ng-template #public> Public</ng-template>
+  </div>
+  <small>Nombre Maximum de colonne</small>
+  <small class="badge badge-primary badge-pill float-right">{{ kanban.columnNumber}}</small>
+</a>
+

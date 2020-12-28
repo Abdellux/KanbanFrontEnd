@@ -14,6 +14,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './home/login/login.component'
 import { AlertMessageComponent } from "./alert-message/alert-message.component";
 import { RegisterComponent } from './home/register/register.component';
+import { ManageKanbanComponent } from './manage-kanban/manage-kanban.component';
+import { AddKanbanComponent } from './manage-kanban/add-kanban/add-kanban.component';
+import { KanbanItemComponent } from './manage-kanban/kanban-item/kanban-item.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { RegisterComponent } from './home/register/register.component';
     LoginComponent,
     AlertMessageComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ManageKanbanComponent,
+    AddKanbanComponent,
+    KanbanItemComponent
 
 
   ],

@@ -11,7 +11,7 @@
       <span *ngIf="singupForm.get('username').errors['required']">
         Entrer un username
       </span>
-      <span *ngIf="singupForm.get('username').errors['nameIsValid']">
+      <span *ngIf="singupForm.get('username').errors.nameIsValid && !singupForm.get('username').errors.required">
         le username existe déjà
       </span>
     </span>

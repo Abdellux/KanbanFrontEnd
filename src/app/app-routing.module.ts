@@ -3,9 +3,9 @@ import { RegisterComponent } from './home/register/register.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { ManageKanbanComponent } from './manage-kanban/manage-kanban.component'
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
   {
     path: 'home',
     component: HomeComponent,
@@ -14,7 +14,8 @@ const routes: Routes = [
       {path: 'register', component: RegisterComponent}
     ]
   },
-
+  {path: 'kanban', component: ManageKanbanComponent},
+  { path: "**", redirectTo: "home/login", pathMatch: "full" }
 
 ];
 

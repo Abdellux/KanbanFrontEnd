@@ -2,6 +2,7 @@ import { UserCredential } from './../user-credential.model';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   invalidLoginErrorMessage: string = "";
   signinForm: FormGroup;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.signinForm = new FormGroup({
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
           if(serviceResponse.status) {
             localStorage.setItem('jwt', serviceResponse.data)
             this.invalidLogin = false;
-            // rediriger sur la page kanbans.
+            this.router.navigate(['/kanban']);
           }
 
 

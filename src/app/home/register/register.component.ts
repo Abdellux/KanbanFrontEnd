@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { UserCredential } from './../user-credential.model';
 
@@ -10,22 +11,23 @@ import { UserCredential } from './../user-credential.model';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   pwd : string;
   singupForm: FormGroup;
-  forbiddenUserNames = ['abdellux'];
-  constructor(private http: HttpClient) { }
+  forbiddenUserName: boolean;
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.singupForm = new FormGroup({
-      'username': new FormControl(null, [Validators.required]),
+      'username': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
       'password': new FormControl(null, Validators.required),
       'confirmPassword': new FormControl(null, [Validators.required, this.confirmPasswordMatched.bind(this)])
 
     });
   }
   forbiddenNames(control: FormControl): {[s: string]:  boolean} {
-    if(this.forbiddenUserNames.indexOf(control.value) != -1) {
+    this.checkUniqueUsername(control.value);
+    if(this.forbiddenUserName) {
       return {'nameIsValid': true};
     }
     return null;
@@ -38,6 +40,7 @@ export class RegisterComponent implements OnInit {
     return null;
   }
   onSubmit() {
+
     const userCred: UserCredential = new UserCredential(this.singupForm.get('username').value, this.singupForm.get('password').value)
     this.http.post("http://localhost:5000/api/user/register",userCred)
       .subscribe( response => {
@@ -45,11 +48,22 @@ export class RegisterComponent implements OnInit {
         if(!data.status) {
             //error le username existe
         } else {
-          // rediger vers la page d'authentification
+          this.router.navigate(['/home/login'])
         }
 
       }, error => {
-          console.log(error);
+          console.log(error)
+      })
+  }
+
+  private checkUniqueUsername(name: string) {
+    this.http.get(`http://localhost:5000/api/user/checkvalidname/${name}`)
+      .toPromise()
+      .then( response =>{
+        this.forbiddenUserName = (<any>response).data;
+      })
+      .catch(error =>{
+        console.log(error);
       })
   }
 
